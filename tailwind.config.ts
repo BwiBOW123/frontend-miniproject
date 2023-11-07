@@ -16,6 +16,9 @@ const config: Config = {
       colors: {
         'custom-blue': '#0047AB', 
       },
+      textColor: {
+        'blues':'#0047AB', 
+      },
     },
   },
   plugins: [],
