@@ -1,15 +1,24 @@
 import Navbar from '@/components/Navbar';
-import Image from 'next/image';
 import React from 'react';
 import "./globals.css"
 import Category from '@/components/Catagory';
 import Loading from '@/components/Loading';
+import Card from '@/components/Card';
+
 
 const GradSchool: React.FC = () => {
   return (
     <div className='container'>
-      <Navbar/>
       <Category/>
+      
+      <div className='my-20 container flex gap-10 justify-center flex-wrap'>
+        <Card/>
+        <Card/>
+        <Card/>
+        <Card/>
+        <Card/>
+        <Card/>
+      </div>
       <Loading/>
     </div>
   );
