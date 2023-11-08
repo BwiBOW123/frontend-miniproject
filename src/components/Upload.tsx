@@ -1,13 +1,18 @@
 "use client"
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import { type } from 'os';
 
+type Props = {
+    text?:string
+    Isimage: boolean;
+  };
 
-
-const UploadComponent: React.FC = () => {
+const UploadComponent: React.FC<Props> = ({Isimage,text}) => {
   const [files, setFiles] = useState<File[]>([]);
   const [progress, setProgress] = useState(0);
   const [dragOver, setDragOver] = useState(false);
+  const [uploadImagesOnly, setUploadImagesOnly] = useState(Isimage);
   useEffect(() => {
     // Perform any actions here when files are added, e.g., validate files or set error messages.
   }, [files]);
@@ -42,13 +47,12 @@ const UploadComponent: React.FC = () => {
 
   const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     if (event.target.files) {
-      const updatedFilesArray = [
-        ...(files ? Array.from(files) : []), // Convert the existing FileList to an array, if it exists
-        ...Array.from(event.target.files), // Convert the new FileList to an array
-      ];
-  
-      // The state will now be an array of Files instead of a FileList.
-      setFiles(updatedFilesArray);
+      let selectedFiles = Array.from(event.target.files);
+      if (uploadImagesOnly) {
+        selectedFiles = selectedFiles.filter(file => file.type.startsWith('image/'));
+      }
+      setFiles([...files, ...selectedFiles]);
+      setProgress(0);
       //uploadFile(files[0]);
       //setProgress(0);
     }
@@ -72,12 +76,11 @@ const UploadComponent: React.FC = () => {
     event.preventDefault();
     setDragOver(false);
     if (event.dataTransfer.files) {
-      const newFiles = Array.from(event.dataTransfer.files);
-      const updatedFilesArray = [
-        ...(files || []), // Use the existing files array
-        ...newFiles, // Add the new files
-      ];
-      setFiles(updatedFilesArray);
+      let droppedFiles = Array.from(event.dataTransfer.files);
+      if (uploadImagesOnly) {
+        droppedFiles = droppedFiles.filter(file => file.type.startsWith('image/'));
+      }
+      setFiles([...files, ...droppedFiles]);
       event.dataTransfer.clearData();
     }
   };
@@ -108,14 +111,8 @@ const UploadComponent: React.FC = () => {
   
 
   return (
-    <div className="bg-black text-white min-h-screen flex flex-col justify-center items-center">
-      <div className="w-4/5 mt-10">
-
-        <button className="mb-6 px-4 py-2 border border-white rounded-full hover:bg-gray-800 focus:outline-none">
-          See it in action 
-          <span className="ml-2">&#x2192;</span>
-        </button>
-        
+    <div className="text-black  flex flex-col justify-center items-center">
+      <div className="w-4/5">
         <div className={`mb-6 border-2 ${dragOver ? 'border-blue-500' : 'border-gray-500'} border-dashed p-6 rounded-md`}
           onDragOver={handleDragOver}
           onDragEnter={handleDragEnter}
@@ -124,7 +121,7 @@ const UploadComponent: React.FC = () => {
           <div className="flex justify-center items-center h-32">
             <label className="cursor-pointer">
               {/* Replace with SVG icon for upload */}
-              <p className="text-center mb-2">drag & drop or click to upload</p>
+              <p className="text-center mb-2">{text}</p>
               
               {/* Hidden Input Element for File Upload */}
               <input 
