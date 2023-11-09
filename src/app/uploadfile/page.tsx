@@ -108,53 +108,37 @@ const UploadComponent: React.FC = () => {
   
 
   return (
-    <div className="bg-black text-white min-h-screen flex flex-col justify-center items-center">
-      <div className="w-4/5 mt-10">
+    <div className="bg-white text-white min-h-screen flex flex-col justify-center items-center">
+      <div className="w-2/6 mt-10">
+      <button type="button" className="text-white bg-gray-800 hover:bg-gray-900 focus:outline-none focus:ring-4 focus:ring-gray-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-gray-800 dark:hover:bg-gray-700 dark:focus:ring-gray-700 dark:border-gray-700 ">Download</button>
+        <ul className='text-black bg-white drop-shadow-md p-10 mt-5'>
+        <li key={1} className="mb-4 flex items-center ">
 
-        <button className="mb-6 px-4 py-2 border border-white rounded-full hover:bg-gray-800 focus:outline-none">
-          See it in action 
-          <span className="ml-2">&#x2192;</span>
-        </button>
-        
-        <div className={`mb-6 border-2 ${dragOver ? 'border-blue-500' : 'border-gray-500'} border-dashed p-6 rounded-md`}
-          onDragOver={handleDragOver}
-          onDragEnter={handleDragEnter}
-          onDragLeave={handleDragLeave}
-          onDrop={handleDrop}>
-          <div className="flex justify-center items-center h-32">
-            <label className="cursor-pointer">
-              {/* Replace with SVG icon for upload */}
-              <p className="text-center mb-2">drag & drop or click to upload</p>
-              
-              {/* Hidden Input Element for File Upload */}
-              <input 
-                type="file"
-                className="hidden"
-                onChange={handleFileChange}
-                multiple
-              />
-            </label>
-          </div>
-        </div>
-
-        <ul>
-          {files && Array.from(files).map((file, index) => (
-            <>
-            <li key={index} className="mb-2 flex items-center">
-              {/* SVG icon for file or any other markup */}
               <div className="h-6 w-6 mr-2">
-                {getFileIcon(file)}
+                📁
               </div>
               {/* Display file name and size */}
-              {file.name} <span className="ml-auto">{Math.round(file.size / 1024)} KB</span>
-              
+              Helloworld1 <span className="ml-auto">{Math.round(2048 / 1024)} KB</span>
+      
             </li>
-            <div className="w-full bg-gray-200 rounded-full dark:bg-gray-700 mb-2">
-              <div className="bg-blue-600 text-xs font-medium text-blue-100 text-center p-0.5 leading-none rounded-full"style={{width:'45%'}}> 45%</div>
+        <li key={1} className="mb-4 flex items-center">
+
+              <div className="h-6 w-6 mr-2">
+                📁
               </div>
-            </>
-            
-          ))}
+              {/* Display file name and size */}
+              Helloworld1 <span className="ml-auto">{Math.round(2048 / 1024)} KB</span>
+      
+            </li>
+        <li key={1} className="mb-4 flex items-center">
+
+              <div className="h-6 w-6 mr-2">
+                📁
+              </div>
+              {/* Display file name and size */}
+              Helloworld1 <span className="ml-auto">{Math.round(2048 / 1024)} KB</span>
+      
+            </li>
         </ul>
         </div>
       </div>

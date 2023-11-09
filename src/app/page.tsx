@@ -10,8 +10,8 @@ const GradSchool: React.FC = () => {
   return (
     <div className='container'>
       <Category/>
-      
-      <div className='my-20 container flex gap-10 justify-center flex-wrap'>
+      <div className='bg-white p-16'>
+      <div className=' my-20 container flex gap-10 justify-center flex-wrap'>
         <Card/>
         <Card/>
         <Card/>
@@ -20,6 +20,8 @@ const GradSchool: React.FC = () => {
         <Card/>
       </div>
       <Loading/>
+
+      </div>
     </div>
   );
 }
