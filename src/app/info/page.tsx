@@ -3,10 +3,14 @@ import Carousel from "@/components/Carousel";
 import Image from "next/image";
 import React from "react";
 import './info.css'
+import Navbar from "@/components/Navbar";
 
 const Info: React.FC = () => {
     return (
+      <>
+      <Navbar/>
       <div className="container mx-auto px-4 mt-10">
+        
         <div className="w-full flex flex-row gap-10 flex-wrap mx-48 ">
             <Carousel/>
             <div className="w-1/4 h-auto bg-white drop-shadow-md flex flex-col gap-8 p-8 sticky top-28">
@@ -25,7 +29,7 @@ const Info: React.FC = () => {
                 </div>
             </div>
             <div className="w-2/4 h-auto flex flex-col gap-5 mt-10">
-              <h1 className=" text-2xl">หัวข้อเรื่อง แบบโลโก้บริษัท Professional สไตล์</h1>
+              <h1 className=" text-2xl">Softwere สำหรับธุรกิจ</h1>
               <hr className="t"/>
               <p className="">Lorem ipsum dolor sit amet consectetur adipisicing elit. Accusamus modi saepe quam quia unde quod itaque ducimus inventore eaque possimus.</p>
               <p className="">Lorem ipsum dolor sit amet consectetur adipisicing elit. Odio, numquam!</p>
@@ -33,9 +37,9 @@ const Info: React.FC = () => {
               <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Veniam incidunt fuga quia, rem adipisci quibusdam eius! Id ipsum eius officiis eos doloremque dolorum pariatur accusamus dicta nesciunt vel quibusdam tempora, adipisci quas.</p>
             </div>
           </div>
-
-        
       </div>
+      </>
+      
     )
 }
 

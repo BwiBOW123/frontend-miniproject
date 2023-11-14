@@ -35,13 +35,13 @@ const Carousel: React.FC = () => {
         <div className="w-3/6 h-2/3  mt-5">
         <Slider {...settings}>
             <div className="w-3/6 h-2/3 ">
-                <img className="w-full" src="/maxresdefault.jpg" alt="Image 1" />
+                <img className="w-full" src="/image4.jpg" alt="Image 1" />
             </div>
             <div className="w-3/6 h-2/3">
-                <img className="w-full" src="/maxresdefault.jpg" alt="Image 2" /> {/* Corrected the image source */}
+                <img className="w-full" src="/image4.jpg" alt="Image 2" /> {/* Corrected the image source */}
             </div>
             <div className="w-3/6 h-2/3">
-                <img className="w-full" src="/maxresdefault.jpg" alt="Image 2" /> {/* Corrected the image source */}
+                <img className="w-full" src="/image4.jpg" alt="Image 2" /> {/* Corrected the image source */}
             </div>
         </Slider>
         </div>

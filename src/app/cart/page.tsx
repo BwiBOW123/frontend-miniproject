@@ -10,41 +10,37 @@ const ShoppingCart: React.FC = () => {
               <thead >
                 <tr>
                   <th>สิ้นค้า</th>
-                  <th>ราคา</th>
                   <th>จำนวน</th>
-                  <th>ราคารวม</th>
+                  <th>ราคา</th>
                 </tr>
               </thead>
               <tbody>
                 <tr>
-                  <td><div className='flex items-center'><Image className=' mr-8' src={'/maxresdefault.jpg'} alt='...' width={200} height={100}/>Item1Item1Item1Item1 </div></td>
-                  <td>2000B</td>
+                  <td><div className='flex items-center'><Image className=' mr-8' src={'/image4.jpg'} alt='...' width={150} height={100}/>Softwere สำหรับธุรกิจ </div></td>
                   <td>1</td>
-                  <td>2000B <button type="button" className="ml-2 text-blue-700 border border-blue-700 hover:bg-blue-700 hover:text-white focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-full text-sm p-2.5 text-center inline-flex items-center dark:border-blue-500 dark:text-blue-500 dark:hover:text-white dark:focus:ring-blue-800 dark:hover:bg-blue-500">
-                    <svg className="w-4 h-4" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 18 18">
-                      <path d="M3 7H1a1 1 0 0 0-1 1v8a2 2 0 0 0 4 0V8a1 1 0 0 0-1-1Zm12.954 0H12l1.558-4.5a1.778 1.778 0 0 0-3.331-1.06A24.859 24.859 0 0 1 6 6.8v9.586h.114C8.223 16.969 11.015 18 13.6 18c1.4 0 1.592-.526 1.88-1.317l2.354-7A2 2 0 0 0 15.954 7Z"/>
-                    </svg>
-                  <span className="sr-only">Icon description</span></button></td>
+                  <td className='flex items-center justify-items-center mt-8'>1500B 
+                    <button type="button" className="ml-2 text-blue-700 border border-blue-700 hover:bg-blue-700 hover:text-white focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-full text-sm p-2.5 text-center inline-flex items-center dark:border-blue-500 dark:text-blue-500 dark:hover:text-white dark:focus:ring-blue-800 dark:hover:bg-blue-500">
+                    <Image src={'/x.svg'} alt='' className='inline ' width={30} height={30}/>
+                    </button>
+                  </td>
                 </tr>
                 <tr>
-                  <td><div className='flex items-center'><Image className=' mr-8' src={'/maxresdefault.jpg'} alt='...' width={200} height={100}/>Item1Item1Item1Item1 </div></td>
-                  <td>2000B</td>
+                  <td><div className='flex items-center'><Image className=' mr-8' src={'/image5.jpg'} alt='...' width={150} height={100}/>Softwere สำหรับธุรกิจ </div></td>
                   <td>1</td>
-                  <td>2000B <button type="button" className="ml-2 text-blue-700 border border-blue-700 hover:bg-blue-700 hover:text-white focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-full text-sm p-2.5 text-center inline-flex items-center dark:border-blue-500 dark:text-blue-500 dark:hover:text-white dark:focus:ring-blue-800 dark:hover:bg-blue-500">
-                    <svg className="w-4 h-4" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 18 18">
-                      <path d="M3 7H1a1 1 0 0 0-1 1v8a2 2 0 0 0 4 0V8a1 1 0 0 0-1-1Zm12.954 0H12l1.558-4.5a1.778 1.778 0 0 0-3.331-1.06A24.859 24.859 0 0 1 6 6.8v9.586h.114C8.223 16.969 11.015 18 13.6 18c1.4 0 1.592-.526 1.88-1.317l2.354-7A2 2 0 0 0 15.954 7Z"/>
-                    </svg>
-                  <span className="sr-only">Icon description</span></button></td>
+                  <td className='flex items-center justify-items-center mt-8'>1500B 
+                    <button type="button" className="ml-2 text-blue-700 border border-blue-700 hover:bg-blue-700 hover:text-white focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-full text-sm p-2.5 text-center inline-flex items-center dark:border-blue-500 dark:text-blue-500 dark:hover:text-white dark:focus:ring-blue-800 dark:hover:bg-blue-500">
+                    <Image src={'/x.svg'} alt='' className='inline ' width={30} height={30}/>
+                    </button>
+                  </td>
                 </tr>
                 <tr>
-                  <td><div className='flex items-center'><Image className=' mr-8' src={'/maxresdefault.jpg'} alt='...' width={200} height={100}/>Item1Item1Item1Item1 </div></td>
-                  <td>2000B</td>
+                  <td><div className='flex items-center'><Image className=' mr-8' src={'/image6.jpg'} alt='...' width={150} height={100}/>Softwere สำหรับ Cloud </div></td>
                   <td>1</td>
-                  <td>2000B <button type="button" className="ml-2 text-blue-700 border border-blue-700 hover:bg-blue-700 hover:text-white focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-full text-sm p-2.5 text-center inline-flex items-center dark:border-blue-500 dark:text-blue-500 dark:hover:text-white dark:focus:ring-blue-800 dark:hover:bg-blue-500">
-                    <svg className="w-4 h-4" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 18 18">
-                      <path d="M3 7H1a1 1 0 0 0-1 1v8a2 2 0 0 0 4 0V8a1 1 0 0 0-1-1Zm12.954 0H12l1.558-4.5a1.778 1.778 0 0 0-3.331-1.06A24.859 24.859 0 0 1 6 6.8v9.586h.114C8.223 16.969 11.015 18 13.6 18c1.4 0 1.592-.526 1.88-1.317l2.354-7A2 2 0 0 0 15.954 7Z"/>
-                    </svg>
-                  <span className="sr-only">Icon description</span></button></td>
+                  <td className='flex items-center justify-items-center mt-8'>1000B 
+                    <button type="button" className="ml-2 text-blue-700 border border-blue-700 hover:bg-blue-700 hover:text-white focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-full text-sm p-2.5 text-center inline-flex items-center dark:border-blue-500 dark:text-blue-500 dark:hover:text-white dark:focus:ring-blue-800 dark:hover:bg-blue-500">
+                    <Image src={'/x.svg'} alt='' className='inline ' width={30} height={30}/>
+                    </button>
+                  </td>
                 </tr>
             
               </tbody>
@@ -55,7 +51,7 @@ const ShoppingCart: React.FC = () => {
             <hr className="o"/>
             <div className='flex justify-between'>
               <h1 >ราคา</h1>
-              <p className="text-slate-400 leading-normal mt-2 ml-5">200B</p>
+              <p className="text-slate-400 leading-normal mt-2 ml-5">4000B</p>
             </div>
             <div className='flex justify-between'>
               <h1>VAT</h1>
@@ -63,7 +59,7 @@ const ShoppingCart: React.FC = () => {
             </div>
             <div className='flex justify-between'>
               <h1>ราคารวม</h1>
-              <p className="text-slate-400 leading-normal mt-2 ml-5">250B</p>
+              <p className="text-slate-400 leading-normal mt-2 ml-5">4050B</p>
             </div>
             <div>
               <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded w-full ">ชำระสิ้นค้า</button>

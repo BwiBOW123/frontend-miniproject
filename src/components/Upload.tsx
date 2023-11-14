@@ -1,60 +1,54 @@
 "use client"
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import { type } from 'os';
+import { setFips } from 'crypto';
+
 
 type Props = {
     text?:string
     Isimage: boolean;
   };
 
+
+  
 const UploadComponent: React.FC<Props> = ({Isimage,text}) => {
+
   const [files, setFiles] = useState<File[]>([]);
   const [progress, setProgress] = useState(0);
   const [dragOver, setDragOver] = useState(false);
   const [uploadImagesOnly, setUploadImagesOnly] = useState(Isimage);
-  useEffect(() => {
-    // Perform any actions here when files are added, e.g., validate files or set error messages.
-  }, [files]);
 
-  const uploadFile = async (file: File) => {
-    const formData = new FormData();
-    formData.append('file', file);
 
-    try {
-      const response = await axios.post('/upload', formData, {
-        headers: {
-          'Content-Type': 'multipart/form-data'
-        },
-        onUploadProgress: (progressEvent) => {
-          console.log(progressEvent); // Check the structure of the progress event.
-          const total = progressEvent.total;
-          if (total) {
-            const percentCompleted = Math.round((progressEvent.loaded * 100) / total);
-            setProgress(percentCompleted);
-          }
-        }
-      });
-      console.log(response.data);
-    } catch (error) {
-      if (axios.isAxiosError(error)) {
-        console.error('Error uploading file:', error.response?.data);
-      } else {
-        console.error('Unexpected error:', error);
+  const fileToBase64 = (file: File): Promise<string> => {
+    return new Promise((resolve, reject) => {
+        const reader = new FileReader();
+        reader.readAsDataURL(file);
+        reader.onload = () => resolve(reader.result as string);
+        reader.onerror = error => reject(error);
+    });
+};
+  const uploadFile = async () => {
+    if (files) {
+      try {
+          const base64 = await fileToBase64(files[0]);
+          const dataToSend = {
+              'product_id': 4,
+              'data': base64
+          };
+
+          const response = await axios.post('http://127.0.0.1:8000/Uploadfile', dataToSend);
+          console.log('Response:', response.data);
+      } catch (error) {
+          console.error('Error:', error);
       }
-    }
+  }
   };
 
-  const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    if (event.target.files) {
-      let selectedFiles = Array.from(event.target.files);
-      if (uploadImagesOnly) {
-        selectedFiles = selectedFiles.filter(file => file.type.startsWith('image/'));
-      }
-      setFiles([...files, ...selectedFiles]);
-      setProgress(0);
-      //uploadFile(files[0]);
-      //setProgress(0);
+  const handleFileChange = async (event: React.ChangeEvent<HTMLInputElement>) => {
+    const file = event.target.files;
+    if (file) {
+        setFiles(Array.from(file));
+        setProgress(0);
     }
   }
   const handleDragOver = (event: React.DragEvent<HTMLDivElement>) => {
@@ -111,7 +105,7 @@ const UploadComponent: React.FC<Props> = ({Isimage,text}) => {
   
 
   return (
-    <div className="text-black  flex flex-col justify-center items-center">
+    <div id='Upload'  className="text-black  flex flex-col justify-center items-center">
       <div className="w-4/5">
         <div className={`mb-6 border-2 ${dragOver ? 'border-blue-500' : 'border-gray-500'} border-dashed p-6 rounded-md`}
           onDragOver={handleDragOver}
@@ -132,8 +126,9 @@ const UploadComponent: React.FC<Props> = ({Isimage,text}) => {
               />
             </label>
           </div>
+          
         </div>
-
+        <button onClick={uploadFile}>Upload</button>
         <ul>
           {files && Array.from(files).map((file, index) => (
             <>
@@ -144,11 +139,10 @@ const UploadComponent: React.FC<Props> = ({Isimage,text}) => {
               </div>
               {/* Display file name and size */}
               {file.name} <span className="ml-auto">{Math.round(file.size / 1024)} KB</span>
-              
             </li>
             <div className="w-full bg-gray-200 rounded-full dark:bg-gray-700 mb-2">
-              <div className="bg-blue-600 text-xs font-medium text-blue-100 text-center p-0.5 leading-none rounded-full"style={{width:'45%'}}> 45%</div>
-              </div>
+              <div className="bg-blue-600 text-xs font-medium text-blue-100 text-center p-0.5 leading-none rounded-full"style={{width:progress}}> {progress}</div>
+            </div>
             </>
             
           ))}

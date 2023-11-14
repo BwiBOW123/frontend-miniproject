@@ -55,7 +55,6 @@ import {
     return (
         <>
         <div style={{ width: '800px', height: '420px' }} className='bg-white drop-shadow-md px-10'>
-            <h1>Hello World</h1> 
             <Line  data={data} options={options} />
         </div>
         </>
