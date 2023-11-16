@@ -30,9 +30,6 @@ export default function Category(){
                     <p className="font-bold text-xl">AI</p>
                 </div>
                 </Link>
-
-
-
             </div>
         </div>
     )

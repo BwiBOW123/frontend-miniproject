@@ -34,7 +34,7 @@ import {
       labels,
       datasets: [
         {
-          label: 'Dataset',
+          label: 'รายได้ต่อวัน',
           data: dataset,
           fill: true,
           backgroundColor: 'rgba(75,192,192,0.2)',

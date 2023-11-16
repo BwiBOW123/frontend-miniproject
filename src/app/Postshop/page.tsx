@@ -6,12 +6,16 @@ import Link from "next/link"
 import axios from 'axios';
 import {useSession} from "next-auth/react"
 import { Session } from 'inspector';
+import Navbar from '@/components/Navbar';
+import Radio from '@/components/Radio'
 interface FormState {
     name: string;
     description: string;
     price: number;
+    cart_id: number;
     category_id: number;
     member_id:number
+    url_download:string
 }
 const Post:React.FC = () => {
 
@@ -32,15 +36,15 @@ const Post:React.FC = () => {
     const uploadFile = (product_id:number) => {
       if (files) {
         try {
-            files.forEach(async()=>{
-                const base64 = await fileToBase64(files[0]);
-                const dataToSend = {
-                    'product_id': product_id,
-                    'data': base64
-                };
-      
-                const response = await axios.post('http://127.0.0.1:8000/Uploadimage', dataToSend);
-                console.log('Response:', response.data);
+            files.map( async(data)=>{
+              const base64 = await fileToBase64(data);
+              const dataToSend = {
+                  'product_id': product_id,
+                  'data': base64
+              };
+    
+              const response = await axios.post('http://127.0.0.1:8000/Uploadimage', dataToSend);
+              console.log('Response:', response.data);
             })
 
         } catch (error) {
@@ -116,8 +120,10 @@ const Post:React.FC = () => {
         "name": '',
         "description": '',
         "price": 0.00,
+        "cart_id": 1,
         "category_id":1,
         "member_id":1,
+        "url_download":'ฟหกฟหก',
     }
         );
         const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -139,6 +145,7 @@ const Post:React.FC = () => {
             try {
                 const res = await axios.get('http://localhost:8000/users?email='+session?.user?.email)
                 formData.member_id = res.data.ID
+                formData.category_id = parseInt(selectedValue)
                 const response = await axios.post('http://127.0.0.1:8000/products', formData);
                 await uploadFile(response.data.ID)
                 // Handle successful submission here, like redirecting to another page
@@ -149,8 +156,18 @@ const Post:React.FC = () => {
     };
 
 
+    const [selectedValue, setSelectedValue] = useState('');
+
+    const handleChange3 = (event: React.ChangeEvent<HTMLInputElement>) => {
+        const { id, value } = event.target;
+        setSelectedValue(id);
+    };
+
+
     return (
-        <form className='container flex flex-col items-center'>
+      <div className='container bg-white'>
+        <Navbar/>
+<form className=' flex flex-col items-center '>
                     <div  className='bg-white drop-shadow-md w-2/4 p-10 mt-10 mb-10'>
                         <div className='mb-6'>
                             <label className="text-xl text-black block mb-2 text-sm font-medium">หัวเรื่อง</label>
@@ -164,6 +181,51 @@ const Post:React.FC = () => {
                             <label className="text-xl text-black block mb-2 text-sm font-medium">ราคา</label>
                             <input id="price" onChange={handleChange} className='bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 ' type="text"  />
                         </div>
+                        <div className='mb-6'>
+                            <label className="text-xl text-black block mb-2 text-sm font-medium">URL DOWNLOAD</label>
+                            <input id="url_download" onChange={handleChange} className='bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 ' type="text"  />
+                        </div>
+                        <div className='mb-6'>
+                          <label className="text-xl text-black block mb-2 text-sm font-medium">เลือกหมวดหมู่</label>
+                          <div className=' flex gap-6 mt-4'>
+                          <Radio 
+                id="1"
+                name="radio-group"
+                value="Web Application"
+                checked={selectedValue === 'Option 1'}
+                onChange={handleChange3}
+            />
+            <Radio 
+                id="2"
+                name="radio-group"
+                value="Mobile Application"
+                checked={selectedValue === 'Option 2'}
+                onChange={handleChange3}
+              
+            />
+            <Radio 
+                id="3"
+                name="radio-group"
+                value="Desktop Application"
+                checked={selectedValue === 'Option 2'}
+                onChange={handleChange3}
+              
+            />
+            <Radio 
+                id="4"
+                name="radio-group"
+                value="AI"
+                checked={selectedValue === 'Option 2'}
+                onChange={handleChange3}
+              
+            />
+                          </div>
+          
+                        </div>
+
+
+
+                        
                     </div>
                     <div  className='bg-white drop-shadow-md w-2/4 p-10 mt-10'>
                         <div className='mb-6'>
@@ -176,7 +238,7 @@ const Post:React.FC = () => {
           onDrop={handleDrop}>
           <div className="flex justify-center items-center h-32">
             <label className="cursor-pointer">
-              <p className="text-center mb-2">Hello</p>
+              <p className="text-center mb-2">Drop Image for product 🖼️</p>
               
               <input 
                 type="file"
@@ -206,6 +268,8 @@ const Post:React.FC = () => {
                         <button onClick={handleSubmit} type="submit" className='bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded'>Submit</button>
                     </div>
         </form>
+      </div>
+        
     )
 }
 

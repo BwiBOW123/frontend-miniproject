@@ -20,7 +20,13 @@ const PrevArrow: React.FC<CustomArrowProps> = ({ className, style, onClick }) =>
   />
 );
 
-const Carousel: React.FC = () => {
+
+interface props{
+  data?:[any]
+
+}
+
+const Carousel: React.FC<props> = ({data}) => {
   const settings = {
     dots: true,
     infinite: true,
@@ -32,19 +38,23 @@ const Carousel: React.FC = () => {
   };
 
   return (
-        <div className="w-3/6 h-2/3  mt-5">
-        <Slider {...settings}>
-            <div className="w-3/6 h-2/3 ">
-                <img className="w-full" src="/image4.jpg" alt="Image 1" />
+        <>
+        {data == null?
+            <>
+            </>
+            :
+            <div className="w-3/6 h-2/3 mt-5">
+            <Slider {...settings}>
+              {data.map((d:any)=>{return (
+                 <div className="w-3/5 h-2/3 ">
+                      <img className="mx-auto w-full max-w-xl" src={"data:image/jpeg;"+atob(d.Data)} alt="Image 2" /> {/* Corrected the image source */}
+                  </div>
+              )})}
+           
+              </Slider>
             </div>
-            <div className="w-3/6 h-2/3">
-                <img className="w-full" src="/image4.jpg" alt="Image 2" /> {/* Corrected the image source */}
-            </div>
-            <div className="w-3/6 h-2/3">
-                <img className="w-full" src="/image4.jpg" alt="Image 2" /> {/* Corrected the image source */}
-            </div>
-        </Slider>
-        </div>
+          }
+        </>
   );
 };
 

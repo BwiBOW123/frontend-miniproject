@@ -7,6 +7,9 @@ import Loading from '@/components/Loading';
 import Card from '@/components/Card';
 import axios from 'axios';
 
+
+
+
 const getData = async()=>{
   try {
     const res = await axios.get('http://127.0.0.1:8000/productimages')
@@ -17,7 +20,6 @@ const getData = async()=>{
     return []
   }
 }
-
 
 const GradSchool = async () => {
   const d:any = await getData()
@@ -31,8 +33,19 @@ const GradSchool = async () => {
       </div>
       <Category/>
       <div className='bg-white p-16'>
-      <div className=' my-10 container flex gap-10 justify-center flex-wrap'>
-        {d.map((data:any)=>{return <Card image={data.Data} head={data.Name} price={data.Price} des={data.Description}/>})}
+      <div className=' my-10 container bg-white flex gap-10 justify-center flex-wrap'>
+          <>
+            {d == null?
+                <>
+                  <Loading/>
+                </>
+                :
+                <>
+                {await d.map((data:any)=><Card id={data.ID} cart_id={1} product_id={data.ID} image={data.Data} head={data.Name} price={data.Price} des={data.Description}/>)}
+                  
+                </>
+            }
+          </>
       </div>
       </div>
     </div>

@@ -27,7 +27,7 @@ const GradSchool = async () => {
   if(d == null){
     show = <Loading/>
   }else{
-    show = d.map((data:any)=>{return <Card image={data.Data} head={data.Name} price={data.Price} des={data.Description}/>})
+    show = d.map((data:any)=>{return <Card id={data.ID} cart_id={1} product_id={data.ID} image={data.Data} head={data.Name} price={data.Price} des={data.Description}/>})
   }
   return (
     <div className='container'>
