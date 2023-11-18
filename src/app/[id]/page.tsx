@@ -2,13 +2,13 @@
 'use client'
 import { useParams } from 'next/navigation'
 import Navbar from '@/components/Navbar';
-import React from 'react';
+
 import "../globals.css"
 import Category from '@/components/Catagory';
 import Loading from '@/components/Loading';
 import Card from '@/components/Card';
 import axios from 'axios';
-
+import React ,{useEffect,useState}from 'react';
 const getData = async(url:string)=>{
   try {
     const res = await axios.get(url)
@@ -20,9 +20,14 @@ const getData = async(url:string)=>{
 }
 
 
-const GradSchool = async () => {
+const GradSchool = () => {
   const params = useParams()
-  const d:any = await getData('http://127.0.0.1:8000/productimagesByCat?id='+params.id)
+  const [d,setD] = useState<any>([])
+  useEffect(()=>{
+    axios.get('http://54.251.12.80:8000/productimagesByCat?id='+params.id).then((res)=>{
+        setD(res.data)
+    })
+  },[])
   let show;
   if(d == null){
     show = <Loading/>

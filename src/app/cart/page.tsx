@@ -29,7 +29,10 @@ const ShoppingCart: React.FC = () => {
   const email:any = session?.user?.email
   useEffect(()=>{
     const fetchData=async()=>{
-      await axios.get<Data[]>('http://127.0.0.1:8000/CartProductEmail?id='+email)
+      if(session == null){
+        window.location.href = '/';
+      }
+      await axios.get<Data[]>('http://54.251.12.80:8000/CartProductEmail?id='+email)
       .then(response => {
         setData(response.data)
         console.log(response.data)
@@ -47,11 +50,14 @@ const ShoppingCart: React.FC = () => {
       fetchData()
   },[total])
 
+  
+
+
 
   const handleDelete = async (itemId:number) => {
     // Filter out the item with the specified ID
     const updatedData = datas.filter(item => item.ID !== itemId);
-    await axios.delete('http://127.0.0.1:8000/DeleteProduct?id='+itemId)
+    await axios.delete('http://54.251.12.80:8000/DeleteProduct?id='+itemId)
     setTotal(0)
     setData(updatedData);
   };
@@ -62,7 +68,7 @@ const ShoppingCart: React.FC = () => {
       const base64String = "data:image/jpeg;"+d.ProductImage;
       return (
       <tr id={index.toString()}>
-      <td><div className='flex items-center'><Image className=' mr-8' src={base64String} alt='...' width={150} height={100}/>{d.ProductName}</div></td>
+      <td><div className='flex items-center'><Image className=' mr-8' src={base64String} alt='...' width={100} height={100}/>{d.ProductName}</div></td>
       <td>{d.Quantity}</td>
       <td className='text-center'>{d.ProductPrice}B
 
@@ -93,7 +99,7 @@ const ShoppingCart: React.FC = () => {
               <tbody>
                 {datas == null?
                 <>
-                  <Loading/>
+                  <div></div>
                 </>
                 :
                 <>

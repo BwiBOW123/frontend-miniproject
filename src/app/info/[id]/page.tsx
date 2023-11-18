@@ -31,7 +31,7 @@ const Info: React.FC = () => {
     });
     useEffect(()=>{
         const getData =async ()=>{
-            await axios.get('http://localhost:8000/productimagesById?id='+params.id).then((res)=>{
+            await axios.get('http://54.251.12.80:8000/productimagesById?id='+params.id).then((res)=>{
                 const data = res.data
                 console.log(data)
                 SetData(data)
@@ -48,7 +48,7 @@ const Info: React.FC = () => {
       const mail:any = await session?.user?.email
       CartProduct.email = mail
       try {
-        const response = await axios.post('http://127.0.0.1:8000/CartProduct', CartProduct);
+        const response = await axios.post('http://54.251.12.80:8000/CartProduct', CartProduct);
         console.log('Member created:', response.data);
       } catch (error) {
         console.error('There was an error!', error);
@@ -58,7 +58,7 @@ const Info: React.FC = () => {
     return (
       <>
       <Navbar/>
-      <div className="container bg-white overflow-x-hidden">
+      <div className="container bg-white overflow-x-hidden text-black">
         {data !=null?
           <>
             <div className="w-full flex flex-row gap-10 flex-wrap mx-48 ">
@@ -66,7 +66,7 @@ const Info: React.FC = () => {
             <div className="w-1/4 h-48 bg-white drop-shadow-md flex flex-col gap-8 p-8 sticky top-28">
                 <h1 className="text-center text-2xl">฿ {data[0].Price}</h1>
                 <hr className="o"/>
-                <div>
+            <div>
                   <Link href={'/cart'}>
                 <button onClick={()=>handlerCreateCart()} className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded w-full ">ซื้อสิ้นค้า</button>
                   </Link>

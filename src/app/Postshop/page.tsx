@@ -43,7 +43,7 @@ const Post:React.FC = () => {
                   'data': base64
               };
     
-              const response = await axios.post('http://127.0.0.1:8000/Uploadimage', dataToSend);
+              const response = await axios.post('http://54.251.12.80:8000/Uploadimage', dataToSend);
               console.log('Response:', response.data);
             })
 
@@ -143,11 +143,12 @@ const Post:React.FC = () => {
         const handleSubmit = async (e: FormEvent) => {
             e.preventDefault();
             try {
-                const res = await axios.get('http://localhost:8000/users?email='+session?.user?.email)
+                const res = await axios.get('http://54.251.12.80:8000/users?email='+session?.user?.email)
                 formData.member_id = res.data.ID
                 formData.category_id = parseInt(selectedValue)
-                const response = await axios.post('http://127.0.0.1:8000/products', formData);
+                const response = await axios.post('http://54.251.12.80:8000/products', formData);
                 await uploadFile(response.data.ID)
+                window.location.href = '/1';
                 // Handle successful submission here, like redirecting to another page
             } catch (error) {
                 console.error('Error submitting form:', error);

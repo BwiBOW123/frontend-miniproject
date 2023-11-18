@@ -14,7 +14,7 @@ export const authOptions: NextAuthOptions = {
             },
             async authorize(credentials, req) {
                 // Logic for user authentication
-                const res = await fetch("http://127.0.0.1:8000/login", {
+                const res = await fetch("http://54.251.12.80:8000/login", {
                     method: 'POST',
                     body: JSON.stringify(credentials),
                     headers: { "Content-Type": "application/json" }

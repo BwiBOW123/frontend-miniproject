@@ -43,7 +43,7 @@ const Carousel: React.FC<props> = ({data}) => {
             <>
             </>
             :
-            <div className="w-3/6 h-2/3 mt-5">
+            <div className="w-3/6 h-2/3 mt-5 bg-white drop-shadow-md">
             <Slider {...settings}>
               {data.map((d:any)=>{return (
                  <div className="w-3/5 h-2/3 ">

@@ -36,7 +36,7 @@ const UploadComponent: React.FC<Props> = ({Isimage,text}) => {
               'data': base64
           };
 
-          const response = await axios.post('http://127.0.0.1:8000/Uploadfile', dataToSend);
+          const response = await axios.post('http://54.251.12.80:8000/Uploadfile', dataToSend);
           console.log('Response:', response.data);
       } catch (error) {
           console.error('Error:', error);

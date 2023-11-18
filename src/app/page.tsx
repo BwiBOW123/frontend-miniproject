@@ -1,28 +1,37 @@
 
+'use client'
 import Navbar from '@/components/Navbar';
-import React from 'react';
+import React ,{useEffect,useState}from 'react';
 import "./globals.css"
 import Category from '@/components/Catagory';
 import Loading from '@/components/Loading';
 import Card from '@/components/Card';
 import axios from 'axios';
 
-
-
-
-const getData = async()=>{
+const getData = async(url:string)=>{
   try {
-    const res = await axios.get('http://127.0.0.1:8000/productimages')
+    const res = await axios.get(url)
     const data = await res.data
     return await data
   } catch (error) {
-    console.log(error)
     return []
   }
 }
 
-const GradSchool = async () => {
-  const d:any = await getData()
+///productimages
+const GradSchool = () => {
+  const [d,setD] = useState<any>([])
+  useEffect(()=>{
+    axios.get('http://54.251.12.80:8000/productimages').then((res)=>{
+        setD(res.data)
+    })
+  },[])
+  let show;
+  if(d == null){
+    show = <Loading/>
+  }else{
+    show = d.map((data:any)=>{return <Card id={data.ID} cart_id={1} product_id={data.ID} image={data.Data} head={data.Name} price={data.Price} des={data.Description}/>})
+  }
   return (
     <div className='container'>
       <Navbar/>
@@ -33,19 +42,8 @@ const GradSchool = async () => {
       </div>
       <Category/>
       <div className='bg-white p-16'>
-      <div className=' my-10 container bg-white flex gap-10 justify-center flex-wrap'>
-          <>
-            {d == null?
-                <>
-                  <Loading/>
-                </>
-                :
-                <>
-                {await d.map((data:any)=><Card id={data.ID} cart_id={1} product_id={data.ID} image={data.Data} head={data.Name} price={data.Price} des={data.Description}/>)}
-                  
-                </>
-            }
-          </>
+      <div className=' my-10 container flex gap-10 justify-center flex-wrap w-full'>
+        {show}
       </div>
       </div>
     </div>
